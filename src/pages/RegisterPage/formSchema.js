@@ -9,7 +9,8 @@ export const formSchema = z.object({
     .min(8, "É necessário pelo menos 8 caracteres")
     .regex(/(?=.*?[A-Z])/, "É necessário pelo menos uma letra maiúscula")
     .regex(/(?=.*?[a-z])/, "É necessário pelo menos uma letra minúscula")
-    .regex(/(?=.*?[0-9])/, "É necessário pelo menos um número."),
+    .regex(/(?=.*?[0-9])/, "É necessário pelo menos um número")
+    .regex(/(?=.*?[#?!@$%^&*-])/, "É necessário pelo menos um caractere"),
     confirmPassword: z.string().nonempty("Confirme sua senha"),
     bio: z.string().nonempty("Bio é obrigatória"),
     contact: z.string().nonempty("Contato é obrigatório"),

@@ -28,15 +28,8 @@
         color: var(--color-grey-0);
     }
 
-    form {
-        width: 90%;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    Form {
         gap: 1.375rem;
-
     }
 
     small {
@@ -90,5 +83,11 @@
 
     .formContainer {
         width: 90%;
+    }
+}
+
+@media (max-width: 375px ) {
+    .loginContainer {
+        margin-top: 2rem;
     }
 }

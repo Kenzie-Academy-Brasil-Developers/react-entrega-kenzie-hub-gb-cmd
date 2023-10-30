@@ -1,12 +1,13 @@
-import styles from "./style.module.scss"
-import logo from "../../assets/img/kenzie-hub-logo.svg"
-import { useForm } from "react-hook-form"
+import styles from "./style.module.scss";
+import logo from "../../assets/img/kenzie-hub-logo.svg";
+import { useForm } from "react-hook-form";
 import { InputForm } from "../../components/InputForm";
 import { Link, useNavigate } from "react-router-dom";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { loginFormSchema } from "./loginFormSchema"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginFormSchema } from "./loginFormSchema";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { FormSection } from "../../components/FormSection";
 
 
 export const LoginPage = ({ setLoggedInUser }) => {
@@ -21,10 +22,12 @@ export const LoginPage = ({ setLoggedInUser }) => {
         try {
             const { data } = await api.post("/sessions", formData);
             setLoggedInUser(data);
+
             localStorage.setItem("@USERTOKEN", JSON.stringify(data.token));
             navigate("/dashboard");
         } catch (error) {
             toast.error("Email ou senha incorretos");
+            
         }
     };
 
@@ -41,13 +44,13 @@ export const LoginPage = ({ setLoggedInUser }) => {
 
                     <h3 className="title1">Login</h3>
 
-                    <form onSubmit={handleSubmit(submit)}>
+                    <FormSection onSubmit={handleSubmit(submit)}>
                         <InputForm type="email" label="Email" placeholder="Digite aqui seu nome" {...register("email")} error={errors.email} />
 
                         <InputForm type="password" label="Senha" placeholder="Digite aqui sua senha" {...register("password")} error={errors.password} />
 
                         <button className={styles.logInButton}>Entrar</button>
-                    </form>
+                    </FormSection>
 
                     <small className="headlineBold">Ainda não possui uma conta ?</small>
 

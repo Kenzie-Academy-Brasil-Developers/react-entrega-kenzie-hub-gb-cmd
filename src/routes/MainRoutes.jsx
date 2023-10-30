@@ -1,8 +1,8 @@
-import { Route, Routes } from "react-router-dom"
-import { LoginPage } from "../pages/LoginPage"
-import { RegisterPage } from "../pages/RegisterPage"
-import { DashboardPage } from "../pages/DashboardPage"
-import { useState } from "react"
+import { Route, Routes } from "react-router-dom";
+import { LoginPage } from "../pages/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage";
+import { DashboardPage } from "../pages/DashboardPage";
+import { useState } from "react";
 
 export const MainRoutes = () => {
 
@@ -15,4 +15,4 @@ export const MainRoutes = () => {
             <Route path="/dashboard" element={ <DashboardPage loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} /> } />
         </Routes>
     )
-}
+};

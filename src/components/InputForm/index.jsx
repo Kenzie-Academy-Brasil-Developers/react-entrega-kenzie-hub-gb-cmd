@@ -1,5 +1,5 @@
-import { forwardRef } from "react"
-import styles from "./style.module.scss"
+import { forwardRef } from "react";
+import styles from "./style.module.scss";
 
 export const InputForm = forwardRef(({label, error, ...rest}, ref) => {
 
