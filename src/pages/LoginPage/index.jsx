@@ -5,31 +5,20 @@ import { InputForm } from "../../components/InputForm";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema } from "./loginFormSchema";
-import { api } from "../../services/api";
-import { toast } from "react-toastify";
 import { FormSection } from "../../components/FormSection";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 
-export const LoginPage = ({ setLoggedInUser }) => {
+export const LoginPage = () => {
+
+    const { loginUser } = useContext(UserContext);
 
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         register: zodResolver(loginFormSchema),
     });
-
-    const loginUser = async (formData) => {
-        try {
-            const { data } = await api.post("/sessions", formData);
-            setLoggedInUser(data);
-
-            localStorage.setItem("@USERTOKEN", JSON.stringify(data.token));
-            navigate("/dashboard");
-        } catch (error) {
-            toast.error("Email ou senha incorretos");
-            
-        }
-    };
 
     const submit = (formData) => {
         loginUser(formData);

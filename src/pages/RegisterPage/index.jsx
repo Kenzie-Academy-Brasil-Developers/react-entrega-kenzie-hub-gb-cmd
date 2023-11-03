@@ -5,30 +5,19 @@ import styles from "./style.module.scss";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema } from "./formSchema";
 import { Link, useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
-import { toast } from "react-toastify";
 import { FormSection } from "../../components/FormSection";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 export const RegisterPage = () => {
+
+    const { registerUser } = useContext(UserContext);
 
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(formSchema)
     });
-
-    const registerUser = async (formData) => {
-        try {
-            const { data } = await api.post("/users", formData);
-
-            toast.success("Conta criada com sucesso!");
-            
-            navigate("/")
-        } catch (error) {
-            toast.error("Ops! Algo deu errado");
-            
-        }
-    }
 
     const submit = (formData) => {
         registerUser(formData);

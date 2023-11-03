@@ -1,16 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/img/kenzie-hub-logo.svg";
 import styles from "./style.module.scss";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
-export const DashboardPage = ({ loggedInUser, setLoggedInUser }) => {
+export const DashboardPage = () => {
+
+    const { loggedInUser, logout } = useContext(UserContext);
 
     const navigate = useNavigate();
-
-    const logout = () => {
-        setLoggedInUser([]);
-        localStorage.removeItem("@USERTOKEN");
-        navigate("/");
-    };
 
     return (
         <main>
