@@ -23,9 +23,9 @@ export const DashboardPage = () => {
                 <hr />
 
                 <div className={styles.dashBoardHeader}>
-                    <h2 className="title1">Olá, {loggedInUser.user.name}</h2>
+                    <h2 className="title1">Olá, {loggedInUser.name}</h2>
 
-                    <small className="headline">{loggedInUser.user.course_module}</small>
+                    <small className="headline">{loggedInUser.course_module}</small>
                 </div>  
 
                 <hr />

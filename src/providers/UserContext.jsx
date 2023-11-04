@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -10,27 +10,50 @@ export const UserProvider = ({ children }) => {
 
     const navigate = useNavigate();
 
-    const [loggedInUser, setLoggedInUser] = useState([]);
+    const [loggedInUser, setLoggedInUser] = useState(null);
+
+    useEffect(() => {
+        const autoUserLogin = async () => {
+            const userToken = localStorage.getItem("@USERTOKEN");
+            
+            if(userToken) {
+                try {
+                    const { data } = await api.get("/profile", {
+                        headers: {
+                            Authorization: `Bearer ${userToken}`
+                        }
+                    });
+
+                    setLoggedInUser(data);
+                    navigate("/dashboard");
+                } catch (error) {
+                    localStorage.removeItem("@USERTOKEN");
+
+                }
+            }
+        }
+        autoUserLogin();
+    }, []);
 
     const registerUser = async (formData) => {
         try {
-            const { data } = await api.post("/users", formData);
+            const response = await api.post("/users", formData);
 
             toast.success("Conta criada com sucesso!");
             
-            navigate("/")
+            navigate("/");
         } catch (error) {
             toast.error("Ops! Algo deu errado");
             
         }
-    }
+    };
 
     const loginUser = async (formData) => {
         try {
             const { data } = await api.post("/sessions", formData);
-            setLoggedInUser(data);
+            setLoggedInUser(data.user);
 
-            localStorage.setItem("@USERTOKEN", JSON.stringify(data.token));
+            localStorage.setItem("@USERTOKEN", data.token);
             navigate("/dashboard");
         } catch (error) {
             toast.error("Email ou senha incorretos");
@@ -39,7 +62,7 @@ export const UserProvider = ({ children }) => {
     };
 
     const logout = () => {
-        setLoggedInUser([]);
+        setLoggedInUser(null);
         localStorage.removeItem("@USERTOKEN");
         navigate("/");
     };
