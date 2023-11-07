@@ -17,7 +17,7 @@ export const LoginPage = () => {
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm({
-        register: zodResolver(loginFormSchema),
+        resolver: zodResolver(loginFormSchema),
     });
 
     const submit = (formData) => {

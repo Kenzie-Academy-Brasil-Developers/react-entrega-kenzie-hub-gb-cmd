@@ -3,6 +3,9 @@ import logo from "../../assets/img/kenzie-hub-logo.svg";
 import styles from "./style.module.scss";
 import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext";
+import { TechList } from "../../components/TechList";
+import { CreateTechModal } from "../../components/CreateTechModal";
+import { EditTechModal } from "../../components/EditTechModal";
 
 export const DashboardPage = () => {
 
@@ -31,12 +34,19 @@ export const DashboardPage = () => {
                 <hr />
 
                 <div className={styles.dashBoardMain}>
-                    <h2 className="title1">Que pena! Estamos em desenvolvimento :&#40;</h2>
-                    <p className="paragraph">Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
+
+                    <div className={styles.techListHeader}>
+                        <h2>Tecnologias</h2>
+                        <button>+</button>
+                    </div>
+
+                    <TechList/>
                 </div>
 
             </section>
-            
+                    
+            {/* <CreateTechModal/> */}
+            {/* <EditTechModal /> */}
         </main>
     )
 }
