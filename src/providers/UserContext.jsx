@@ -11,6 +11,8 @@ export const UserProvider = ({ children }) => {
     const navigate = useNavigate();
 
     const [loggedInUser, setLoggedInUser] = useState(null);
+
+    const [techList, setTechList] = useState([]);
     
     useEffect(() => {
         const autoUserLogin = async () => {
@@ -25,6 +27,7 @@ export const UserProvider = ({ children }) => {
                     });
 
                     setLoggedInUser(data);
+                    setTechList(data.techs)
 
                     navigate("/dashboard");
                 } catch (error) {
@@ -71,7 +74,7 @@ export const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ loggedInUser, setLoggedInUser, registerUser, loginUser, logout }} >
+        <UserContext.Provider value={{ loggedInUser, setLoggedInUser, registerUser, loginUser, logout, techList, setTechList }} >
             {children}
         </UserContext.Provider>
     )

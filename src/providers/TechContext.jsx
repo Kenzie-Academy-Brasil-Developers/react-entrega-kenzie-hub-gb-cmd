@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
+import { UserContext } from "./UserContext"
 
 export const TechContext = createContext({});
 
@@ -8,31 +9,9 @@ export const TechProvider = ({ children }) => {
     
     const [isOpen, setIsOpen] = useState(false);
 
-    const [techList, setTechList] = useState([]);
+    const { techList, setTechList } = useContext(UserContext);
 
     const [editingTech, setEditingTech] =useState(null);
-    
-    useEffect(() => {
-        const getTechList = async () => {
-            
-            const userToken = localStorage.getItem("@USERTOKEN");
-
-            if(userToken) {
-                try {
-                    const { data } = await api.get("/profile", {
-                        headers: {
-                            Authorization: `Bearer ${userToken}`
-                        }
-                    });
-    
-                    setTechList(data.techs);
-                } catch (error) {
-                    toast.error("Ops! Algo deu errado");
-                }
-            }  
-        }
-        getTechList();
-    }, []);
 
     const createTechnology = async (formData) => {
         try {
@@ -97,7 +76,7 @@ export const TechProvider = ({ children }) => {
     }
 
     return (
-        <TechContext.Provider value={{ createTechnology, isOpen, setIsOpen, techList, setTechList, editingTech, setEditingTech, updateTechnology, deleteTechnology }}>
+        <TechContext.Provider value={{ createTechnology, isOpen, setIsOpen,  editingTech, setEditingTech, updateTechnology, deleteTechnology }}>
             {children}
         </TechContext.Provider>
     )

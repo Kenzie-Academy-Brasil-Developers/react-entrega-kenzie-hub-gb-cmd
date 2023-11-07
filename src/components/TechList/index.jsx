@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { TechCard } from "./TechCard";
 import styles from "./style.module.scss";
-import { TechContext } from "../../providers/TechContext";
+import { UserContext } from "../../providers/UserContext";
 
 
 export const TechList = () => {
 
-    const { techList } = useContext(TechContext);
+    const { techList } = useContext(UserContext);
 
     return ( 
         <ul className={styles.TechList}>
