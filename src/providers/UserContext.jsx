@@ -27,7 +27,7 @@ export const UserProvider = ({ children }) => {
                     });
 
                     setLoggedInUser(data);
-                    setTechList(data.techs)
+                    setTechList(data.techs);
 
                     navigate("/dashboard");
                 } catch (error) {
@@ -57,6 +57,7 @@ export const UserProvider = ({ children }) => {
             const { data } = await api.post("/sessions", formData);
 
             setLoggedInUser(data.user);
+            setTechList(data.user.techs);
 
             localStorage.setItem("@USERTOKEN", data.token);
             
