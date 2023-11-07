@@ -14,21 +14,22 @@ export const TechProvider = ({ children }) => {
     
     useEffect(() => {
         const getTechList = async () => {
-
+            
             const userToken = localStorage.getItem("@USERTOKEN");
 
-            try {
-                const { data } = await api.get("/profile", {
-                    headers: {
-                        Authorization: `Bearer ${userToken}`
-                    }
-                });
-
-                setTechList(data.techs);
-            } catch (error) {
-                toast.error("Ops! Algo deu errado");
-            }
-             
+            if(userToken) {
+                try {
+                    const { data } = await api.get("/profile", {
+                        headers: {
+                            Authorization: `Bearer ${userToken}`
+                        }
+                    });
+    
+                    setTechList(data.techs);
+                } catch (error) {
+                    toast.error("Ops! Algo deu errado");
+                }
+            }  
         }
         getTechList();
     }, []);
