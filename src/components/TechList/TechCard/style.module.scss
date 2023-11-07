@@ -21,6 +21,12 @@
     small {
         color: var(--color-grey-1);
     }
+}
+
+.editDeleteContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 
     button {
         width: 19px;
@@ -30,11 +36,7 @@
         color: #FFFFFF;
 
         border: none;
-    }
 
-    div {
-        display: flex;
-        align-items: center;
-        gap: 5px;
+        cursor: pointer;
     }
 }

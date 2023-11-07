@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
     const navigate = useNavigate();
 
     const [loggedInUser, setLoggedInUser] = useState(null);
-
+    
     useEffect(() => {
         const autoUserLogin = async () => {
             const userToken = localStorage.getItem("@USERTOKEN");
@@ -25,6 +25,7 @@ export const UserProvider = ({ children }) => {
                     });
 
                     setLoggedInUser(data);
+
                     navigate("/dashboard");
                 } catch (error) {
                     localStorage.removeItem("@USERTOKEN");
@@ -51,9 +52,11 @@ export const UserProvider = ({ children }) => {
     const loginUser = async (formData) => {
         try {
             const { data } = await api.post("/sessions", formData);
+
             setLoggedInUser(data.user);
 
             localStorage.setItem("@USERTOKEN", data.token);
+            
             navigate("/dashboard");
         } catch (error) {
             toast.error("Email ou senha incorretos");

@@ -7,12 +7,15 @@ import "./styles/typography.scss";
 import { MainRoutes } from "./routes/MainRoutes";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
+import { TechProvider } from "./providers/TechContext";
 
 function App() {
 
   return (
     <>
-      <MainRoutes />
+      <TechProvider>
+        <MainRoutes />
+      </TechProvider>
       <ToastContainer autoClose={3000} theme="dark" />
     </>
   )

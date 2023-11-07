@@ -6,8 +6,12 @@ import { UserContext } from "../../providers/UserContext";
 import { TechList } from "../../components/TechList";
 import { CreateTechModal } from "../../components/CreateTechModal";
 import { EditTechModal } from "../../components/EditTechModal";
+import { TechContext } from "../../providers/TechContext";
+import { AiOutlinePlus } from "react-icons/ai"
 
 export const DashboardPage = () => {
+
+    const { isOpen, setIsOpen, editingTech } = useContext(TechContext);
 
     const { loggedInUser, logout } = useContext(UserContext);
 
@@ -37,7 +41,7 @@ export const DashboardPage = () => {
 
                     <div className={styles.techListHeader}>
                         <h2>Tecnologias</h2>
-                        <button>+</button>
+                        <button onClick={() => setIsOpen(true)}><AiOutlinePlus /></button>
                     </div>
 
                     <TechList/>
@@ -45,8 +49,8 @@ export const DashboardPage = () => {
 
             </section>
                     
-            {/* <CreateTechModal/> */}
-            {/* <EditTechModal /> */}
+            {isOpen ? <CreateTechModal /> : null}
+            {editingTech ? <EditTechModal /> : null}
         </main>
     )
 }
