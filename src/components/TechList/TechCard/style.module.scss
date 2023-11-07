@@ -40,3 +40,17 @@
         cursor: pointer;
     }
 }
+
+@media (max-width: 327px) {
+    .techCard {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start; 
+    }
+
+    .editDeleteContainer {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

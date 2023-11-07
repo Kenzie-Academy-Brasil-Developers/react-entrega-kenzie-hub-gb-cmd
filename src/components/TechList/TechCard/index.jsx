@@ -14,8 +14,11 @@ export const TechCard = ({ tech }) => {
 
             <div className={styles.editDeleteContainer}>
                 <small className="headline">{tech.status}</small>
-                <button onClick={() => setEditingTech(tech)}><HiOutlinePencil /></button>
-                <button onClick={()  => deleteTechnology(tech.id)}><GoTrash /></button>
+
+                <div>
+                    <button onClick={() => setEditingTech(tech)}><HiOutlinePencil /></button>
+                    <button onClick={()  => deleteTechnology(tech.id)}><GoTrash /></button>
+                </div>
             </div>
         </li>
     )
